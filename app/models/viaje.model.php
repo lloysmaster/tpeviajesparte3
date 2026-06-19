@@ -33,4 +33,4 @@ class ViajeModel extends Model {
         $query = $this->db->prepare("DELETE FROM viaje WHERE id = ?");
         $query->execute([$id]);
     }
-    }
+    }d
