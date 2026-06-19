@@ -1,6 +1,6 @@
 <?php
 require_once 'libs/router/router.php';
-require_once 'app/controllers/issues-api.controller.php';
+require_once 'app/controllers/viajes-api.controller.php';
 
 // crea el router
 $router = new Router();
