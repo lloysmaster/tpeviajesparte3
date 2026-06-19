@@ -6,12 +6,12 @@ require_once 'app/controllers/issues-api.controller.php';
 $router = new Router();
 
 // define la tabla de ruteo
-$router->addRoute('issues', 'GET', 'IssuesApiController', 'getIssues');
-$router->addRoute('issues/:id', 'GET', 'IssuesApiController', 'getIssueById');
-$router->addRoute('issues/:id', 'DELETE', 'IssuesApiController', 'removeIssue');
-$router->addRoute('issues', 'POST', 'IssuesApiController', 'insertIssue');
-$router->addRoute('issues/:id', 'PUT', 'IssuesApiController', 'updateIssue');
-$router->addRoute('issues/:id', 'PATCH', 'IssuesApiController', 'patchIssue');
+$router->addRoute('viajes', 'GET', 'viajes-api.controller', 'getViajes');
+$router->addRoute('viajes/:id', 'GET', 'viajes-api.controller', 'getViajeById');
+$router->addRoute('viajes/:id', 'DELETE', 'viajes-api.controller', 'removeViaje');
+$router->addRoute('viajes', 'POST', 'viajes-api.controller', 'insertViaje');
+$router->addRoute('viajes/:id', 'PUT', 'viajes-api.controller', 'updateViaje');
+$router->addRoute('viajes/:id', 'PATCH', 'viajes-api.controller', 'patchViaje');
 
 // rutea según recurso y método de la solicitud
 $router->route($_GET["resource"], $_SERVER['REQUEST_METHOD']);
