@@ -11,4 +11,4 @@ const DB_CHARSET = 'utf8mb4';
 
 // REVISAR RUTA: Si este archivo está en una subcarpeta, agrega /../ antes de 'database'
 const DB_SQL_FILE = __DIR__ . '/db/basededatos.sql';
-const DB_AUTO_DEPLOY = true; d
+const DB_AUTO_DEPLOY = true;
