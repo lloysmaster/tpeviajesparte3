@@ -3,20 +3,29 @@ require_once __DIR__ . '/../models/viajes.model.php';
 
 class ViajesApiController {
     private $model;
-
+    
     public function  __construct() {
         $this->model = new ViajesModel();
     }
 
     public function getViajes($req, $res) {
-    // Capturar parámetros de query
     $sort = $req->query->sort ?? null;
     $order = $req->query->order ?? 'ASC';
+    $destino = $req->query->destino ?? null;
 
-    // Llamar al modelo con los parámetros
-    $viajes = $this->model->getViajes($sort, $order);
+    // Decidimos qué función del modelo usar
+    if ($destino) {
+        // Asumiendo que tu método de filtrado también puede ordenar
+        $viajes = $this->model->getViajesByDestino($destino, $sort, $order);
+    } else {
+        // Usamos el método general
+        $viajes = $this->model->getViajes($sort, $order);
+    }
 
-    // Responder con los datos ordenados
+    if (!$viajes) {
+        return $res->json(['message' => 'No se encontraron viajes'], 404);
+    }
+
     return $res->json($viajes, 200);
 }
 
