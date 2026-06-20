@@ -18,9 +18,10 @@ class ViajesModel extends Model {
     }
     
     public function insertViaje($nombre_ciudad, $pais, $descripcion, $precio) {
-        $query = $this->db->prepare("INSERT INTO viaje (nombre_ciudad, pais, descripcion, precio) VALUES (?, ?, ?, ?)");
-        $query->execute([$nombre_ciudad, $pais, $descripcion, $precio]);
-    }
+    $query = $this->db->prepare("INSERT INTO viaje (nombre_ciudad, pais, descripcion, precio) VALUES (?, ?, ?, ?)");
+    $query->execute([$nombre_ciudad, $pais, $descripcion, $precio]);
+    return $this->db->lastInsertId(); // <-- Agrega esto para devolver el nuevo ID
+}
 
     // Modificar un viaje existente
     public function updateViaje($id, $nombre_ciudad, $pais, $descripcion, $precio) {
