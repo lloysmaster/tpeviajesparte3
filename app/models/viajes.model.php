@@ -3,19 +3,27 @@ require_once 'app/models/model.php';
 
 class ViajesModel extends Model {
     
+    private $columnasPermitidas = ['id', 'nombre_ciudad', 'pais', 'descripcion', 'precio'];
     // Obtener todas las categorías (viajes)
     public function getViajes($sort = null, $order = 'ASC') {
-    // Validar columnas permitidas para evitar SQL Injection
-    $allowedSortColumns = ['nombre_ciudad', 'pais', 'precio'];
-    $sort = in_array($sort, $allowedSortColumns) ? $sort : 'id'; // Default: id
+    $sql = "SELECT * FROM viaje";
+    $sql .= $this->buildOrderBy($sort, $order);
     
-    // Validar orden
-    $order = (strtoupper($order) === 'DESC') ? 'DESC' : 'ASC';
+    // Cambia $this->db->select($sql) por esto:
+    $query = $this->db->query($sql);
+    return $query->fetchAll(PDO::FETCH_OBJ);
+}
 
-    $sql = "SELECT * FROM viaje ORDER BY $sort $order";
+public function getViajesByDestino($destino, $sort = null, $order = 'ASC') {
+    $sql = "SELECT * FROM viaje WHERE nombre_ciudad = ?";
+    $sql .= $this->buildOrderBy($sort, $order);
     
+    // Cambia esto:
+    // return $this->db->select($sql, [$destino]);
+    
+    // Por esto:
     $query = $this->db->prepare($sql);
-    $query->execute();
+    $query->execute([$destino]);
     return $query->fetchAll(PDO::FETCH_OBJ);
 }
 
@@ -43,4 +51,16 @@ class ViajesModel extends Model {
         $query = $this->db->prepare("DELETE FROM viaje WHERE id = ?");
         $query->execute([$id]);
     }
+
+    private function buildOrderBy($sort, $order) {
+    // 1. Validar columna contra lista blanca
+    if (!in_array($sort, $this->columnasPermitidas)) {
+        return ""; // Si no es válida, no ordenamos o ponemos un default
     }
+
+    // 2. Validar orden (solo puede ser ASC o DESC)
+    $order = (strtoupper($order) === 'DESC') ? 'DESC' : 'ASC';
+
+    return " ORDER BY $sort $order";
+}
+}
