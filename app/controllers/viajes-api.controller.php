@@ -37,11 +37,10 @@ class ViajesApiController {
 
     public function insertViaje($req, $res) {
         //[$nombre_ciudad, $pais, $descripcion, $precio, $id]
-        $nombre_ciudad = $req->body->title ?? null;
-        $pais = $req->body->pais ?? null;
-        $descripcion = $req->body->description ?? null;
-        $precio = $req->body->precio ?? null;
-        $id = $req->body->id ?? null;
+        $nombre_ciudad = $req->body->nombre_ciudad ?? null;
+        $pais          = $req->body->pais ?? null;
+        $descripcion   = $req->body->descripcion ?? null;
+        $precio        = $req->body->precio ?? null;
 
         // Valida que vengan todos los datos necesarios en el body
         // Si falta alguno, devolvemos un error 400 (Bad Request)
@@ -49,16 +48,16 @@ class ViajesApiController {
             return $res->json('Falta completar datos', 400);
         }
 
-        $id = $this->model->insertViaje($nombre_ciudad, $pais, $descripcion, $precio, $id);
+        $idNuevo = $this->model->insertViaje($nombre_ciudad, $pais, $descripcion, $precio);
 
         // si el modelo devuelve false, algo falló al guardar (por ejemplo, error en la base de datos)
-        if (!$id) {
+        if (!$idNuevo) {
             return $res->json('Error al insertar', 500);
         }
 
         // se considera una buena práctica devolver la entidad creada que contiene
         // todos los datos que el modelo agregó automaticamente
-        $viaje = $this->model->getViaje($id);
+        $viaje = $this->model->getViaje($idNuevo);
         return $res->json($viaje, 201);
     }
 
@@ -82,9 +81,9 @@ class ViajesApiController {
             return $res->json("El viaje con el id=$id_viaje no existe", 404);
         }
         //[$nombre_ciudad, $pais, $descripcion, $precio, $id]
-        $nombre_ciudad = $req->body->title ?? null;
+        $nombre_ciudad = $req->body->nombre_ciudad ?? null;
         $pais = $req->body->pais ?? null;
-        $descripcion = $req->body->description ?? null;
+        $descripcion = $req->body->descripcion ?? null;
         $precio = $req->body->precio ?? null;
 
         // Valida que vengan todos los datos necesarios en el body
