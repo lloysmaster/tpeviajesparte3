@@ -1,7 +1,7 @@
 <?php
 require_once 'app/models/model.php';
 
-class ViajeModel extends Model {
+class ViajesModel extends Model {
     
     // Obtener todas las categorías (viajes)
     public function getViajes() {
@@ -13,7 +13,7 @@ class ViajeModel extends Model {
     // Obtener un viaje específico
     public function getViaje($id) {
         $query = $this->db->prepare("SELECT * FROM viaje WHERE id = ?");
-        $query->execute([id]);
+        $query->execute([$id]);
         return $query->fetch(PDO::FETCH_OBJ);
     }
     
