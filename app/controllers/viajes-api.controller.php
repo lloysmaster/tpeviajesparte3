@@ -9,18 +9,16 @@ class ViajesApiController {
     }
 
     public function getViajes($req, $res) {
-        $status = $req->query->status ?? null;
+    // Capturar parámetros de query
+    $sort = $req->query->sort ?? null;
+    $order = $req->query->order ?? 'ASC';
 
-        if ($status) {
-            // verificar que el estado sea válido -> sino Bad Request 400
-            $issues = $this->model->getAllByStatus($status);
-        } else {
-            $issues = $this->model->getViajes();
-        }
+    // Llamar al modelo con los parámetros
+    $viajes = $this->model->getViajes($sort, $order);
 
-        // respondo issues con 200 OK
-        return $res->json($issues, 200);
-    }
+    // Responder con los datos ordenados
+    return $res->json($viajes, 200);
+}
 
     public function getViajeById($req, $res) {
         // obtengo el ID que viene como parámetro del endpoint
