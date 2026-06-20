@@ -105,12 +105,7 @@ class ViajesApiController {
         return $res->json($viaje, 200);
     }
 
-    public function patchViaje($req, $res) {
-        // TODO: este lo hacen ustedes ;)
-
-        /* la diferencia entre un PUT y PATCH es que el PUT reemplaza el 
-        recurso entero, mientras que el PATCH permite actualizaciones parciales */
-    }
+    
 }
 
 
