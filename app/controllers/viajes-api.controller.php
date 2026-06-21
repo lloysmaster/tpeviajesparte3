@@ -11,12 +11,12 @@ class ViajesApiController {
     public function getViajes($req, $res) {
     $sort = $req->query->sort ?? null;
     $order = $req->query->order ?? 'ASC';
-    $destino = $req->query->destino ?? null;
+    $pais = $req->query->pais ?? null;
 
     // Decidimos qué función del modelo usar
-    if ($destino) {
+    if ($pais) {
         // Asumiendo que tu método de filtrado también puede ordenar
-        $viajes = $this->model->getViajesByDestino($destino, $sort, $order);
+        $viajes = $this->model->getViajesByDestino($pais, $sort, $order);
     } else {
         // Usamos el método general
         $viajes = $this->model->getViajes($sort, $order);
