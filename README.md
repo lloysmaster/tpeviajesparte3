@@ -34,7 +34,7 @@ Para el endpoint GET /viajes
 | sort | string | No | Define el nombre del campo por el cual se ordenarán los resultados (ej: precio, nombre\_ciudad). | ?sort=precio |
 | order | string | No | Define el sentido del ordenamiento. Valores aceptados: ASC o DESC. (Por defecto: ASC). | ?order=DESC |
 
-### **Ejemplos prácticos de combinación**
+### **Ejemplos de combinación**
 
 * **Filtrar por país:**  
   GET /viajes?pais=argentina  
