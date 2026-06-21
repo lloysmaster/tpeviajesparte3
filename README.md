@@ -24,4 +24,24 @@ ejemplo de post api/viajes
   "precio": 1500.50
 }
 
-get /api/viajes parametros generales
+Para el endpoint GET /viajes
+
+### **Parámetros de consulta (Query Parameters)**
+
+| Parámetro | Tipo | ¿Obligatorio? | Descripción | Ejemplo de uso |
+| :---- | :---- | :---- | :---- | :---- |
+| pais | string | No | Filtra los viajes según el nombre del país de destino. | ?pais=Argentina |
+| sort | string | No | Define el nombre del campo por el cual se ordenarán los resultados (ej: precio, nombre\_ciudad). | ?sort=precio |
+| order | string | No | Define el sentido del ordenamiento. Valores aceptados: ASC o DESC. (Por defecto: ASC). | ?order=DESC |
+
+### **Ejemplos prácticos de combinación**
+
+Puedes combinar estos parámetros usando el signo & en la URL para realizar consultas más específicas:
+
+* **Filtrar por país:**  
+  GET /viajes?pais=argentina  
+* **Ordenar por precio de forma descendente:**  
+  GET /viajes?sort=precio\&order=DESC  
+* **Filtrar y ordenar al mismo tiempo:**  
+  GET /viajes?pais=argentina\&sort=precio\&order=ASC
+
