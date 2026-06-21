@@ -36,8 +36,6 @@ Para el endpoint GET /viajes
 
 ### **Ejemplos prácticos de combinación**
 
-Puedes combinar estos parámetros usando el signo & en la URL para realizar consultas más específicas:
-
 * **Filtrar por país:**  
   GET /viajes?pais=argentina  
 * **Ordenar por precio de forma descendente:**  
