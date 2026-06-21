@@ -1,45 +1,52 @@
-| Método | Endpoint (Ruta) | Descripción                                                                                     | Query Params / Body Requerido                                                        | Códigos HTTP de Respuesta                                                                                                          |
-|--------|-----------------|-------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------|
-| GET    | /api/viajes     | Devuelve la colección entera de viajes. Permite filtrar y ordenar los resultados dinámicamente. | Query Params (Opcionales):?pais=pais?sort=campo?order=ASC/DESC                  | 200 OK: Retorna el JSON con el listado.404 Not Found: Si no se encontraron resultados para el filtro.                              |
-| GET    | /api/viajes/:id | Obtiene los detalles de un viaje específico buscándolo por su identificador único (ID).         | Parámetro URL: :id (Numérico)                                                        | 200 OK: Retorna el JSON del viaje solicitado.404 Not Found: Si el viaje no existe.                                                 |
-| POST   | /api/viajes     | Agrega un nuevo registro de viaje a la base de datos.                                           | Body (JSON):nombre_ciudad (String)pais (String)descripcion (String)precio (Numérico) | 201 Created: Viaje insertado correctamente.400 Bad Request: Faltan datos requeridos.500 Internal Error: Falla en la base de datos. |
-| PUT    | /api/viajes/:id | Modifica de manera completa un viaje existente en la base de datos según su ID.                 | Parámetro URL: :idBody (JSON):nombre_ciudadpaisdescripcionprecio                     | 200 OK: Viaje modificado correctamente.400 Bad Request: Faltan completar datos.404 Not Found: Si el viaje no existe.               |
-| DELETE | /api/viajes/:id | Elimina un viaje de la base de datos según su identificador único.                              | Parámetro URL: :id (Numérico)                                                        | 200 OK: Viaje eliminado exitosamente.404 Not Found: Si el viaje no existe.                                                         |
-| PATCH  | /api/viajes/:id | Modifica parcialmente los datos de un viaje específico.                         | Parámetro URL: :idBody: Campos parciales                                             | N/A                                                                                                                                |
+## **📋 Resumen de la API de Viajes**
 
-ejemplo de put api/viajes/1
+| Método | Endpoint | Descripción | Códigos de Respuesta |
+| :---- | :---- | :---- | :---- |
+| **GET** | /api/viajes | Obtiene la lista de viajes (filtrable). | 200 |
+| **GET** | /api/viajes/:id | Detalles de un viaje específico. | 200, 404 |
+| **POST** | /api/viajes | Crea un nuevo viaje. | 201, 400, 500 |
+| **PUT** | /api/viajes/:id | Actualización completa (Reemplazo). | 200, 400, 404 |
+| **PATCH** | /api/viajes/:id | Actualización parcial. | 200, 400, 404 |
+| **DELETE** | /api/viajes/:id | Elimina un viaje. | 200, 404 |
 
-{
-  "nombre_ciudad": "San Carlos de Bariloche",
-  "pais": "Argentina",
-  "descripcion": "Destino principal de la Patagonia con centro de esquí y gran oferta gastronómica.",
-  "precio": 1650.00
+## **🛠️ Detalle de Operaciones (POST vs PUT)**
+
+trabajando con el recurso ubicado en /api/viajes/1 ...
+
+### **POST (/api/viajes)**
+ 
+**Body JSON:**
+
+JSON  
+{  
+  "nombre\_ciudad": "Bariloche",  
+  "pais": "Argentina",  
+  "descripcion": "Ciudad turística conocida por sus paisajes de montaña y lagos.",  
+  "precio": 1500.50  
 }
-ejemplo de post api/viajes
 
-{
-  "nombre_ciudad": "Bariloche",
-  "pais": "Argentina",
-  "descripcion": "Ciudad turística conocida por sus paisajes de montaña y lagos.",
-  "precio": 1500.50
+### **PUT (/api/viajes/1)**
+
+**Body JSON:**
+
+JSON  
+{  
+  "nombre\_ciudad": "San Carlos de Bariloche",  
+  "pais": "Argentina",  
+  "descripcion": "Destino principal de la Patagonia con centro de esquí y gran oferta gastronómica.",  
+  "precio": 1650.00  
 }
 
-Para el endpoint GET /viajes
+## **🔍 Filtrado y Ordenamiento (GET)**
 
-### **Parámetros de consulta (Query Parameters)**
-
-| Parámetro | Tipo | ¿Obligatorio? | Descripción | Ejemplo de uso |
-| :---- | :---- | :---- | :---- | :---- |
-| pais | string | No | Filtra los viajes según el nombre del país de destino. | ?pais=Argentina |
-| sort | string | No | Define el nombre del campo por el cual se ordenarán los resultados (ej: precio, nombre\_ciudad). | ?sort=precio |
-| order | string | No | Define el sentido del ordenamiento. Valores aceptados: ASC o DESC. (Por defecto: ASC). | ?order=DESC |
+| Parámetro | Tipo | ¿Obligatorio? | Ejemplo de uso |
+| :---- | :---- | :---- | :---- |
+| pais | string | No | ?pais=Argentina |
+| sort | string | No | ?sort=precio |
+| order | string | No | ?order=DESC |
 
 ### **Ejemplos de combinación**
 
-* **Filtrar por país:**  
-  GET /viajes?pais=argentina  
-* **Ordenar por precio de forma descendente:**  
-  GET /viajes?sort=precio\&order=DESC  
-* **Filtrar y ordenar al mismo tiempo:**  
-  GET /viajes?pais=argentina\&sort=precio\&order=ASC
-
+* **Filtrado simple:** /api/viajes?pais=argentina  
+* **Ordenamiento:** /api/viajes?sort=precio\&order=DESC  
+* **Combinado:** /api/viajes?pais=argentina\&sort=precio\&order=ASC
