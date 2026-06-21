@@ -11,12 +11,12 @@ class ViajesApiController {
     public function getViajes($req, $res) {
     $sort = $req->query->sort ?? null;
     $order = $req->query->order ?? 'ASC';
-    $destino = $req->query->destino ?? null;
+    $pais = $req->query->pais ?? null;
 
     // Decidimos qué función del modelo usar
-    if ($destino) {
+    if ($pais) {
         // Asumiendo que tu método de filtrado también puede ordenar
-        $viajes = $this->model->getViajesByDestino($destino, $sort, $order);
+        $viajes = $this->model->getViajesByDestino($pais, $sort, $order);
     } else {
         // Usamos el método general
         $viajes = $this->model->getViajes($sort, $order);
@@ -105,12 +105,7 @@ class ViajesApiController {
         return $res->json($viaje, 200);
     }
 
-    public function patchViaje($req, $res) {
-        // TODO: este lo hacen ustedes ;)
-
-        /* la diferencia entre un PUT y PATCH es que el PUT reemplaza el 
-        recurso entero, mientras que el PATCH permite actualizaciones parciales */
-    }
+    
 }
 
 

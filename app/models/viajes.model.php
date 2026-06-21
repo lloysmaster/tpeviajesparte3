@@ -14,16 +14,16 @@ class ViajesModel extends Model {
     return $query->fetchAll(PDO::FETCH_OBJ);
 }
 
-public function getViajesByDestino($destino, $sort = null, $order = 'ASC') {
-    $sql = "SELECT * FROM viaje WHERE nombre_ciudad = ?";
+public function getViajesByDestino($pais, $sort = null, $order = 'ASC') {
+    $sql = "SELECT * FROM viaje WHERE pais = ?";
     $sql .= $this->buildOrderBy($sort, $order);
     
     // Cambia esto:
-    // return $this->db->select($sql, [$destino]);
+    // return $this->db->select($sql, [$pais]);
     
     // Por esto:
     $query = $this->db->prepare($sql);
-    $query->execute([$destino]);
+    $query->execute([$pais]);
     return $query->fetchAll(PDO::FETCH_OBJ);
 }
 
