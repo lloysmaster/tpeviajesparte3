@@ -1,4 +1,4 @@
-## **📋 Resumen de la API de Viajes**
+## **Resumen de la API de Viajes**
 
 | Método | Endpoint | Descripción | Códigos de Respuesta |
 | :---- | :---- | :---- | :---- |
@@ -9,15 +9,12 @@
 | **PATCH** | /api/viajes/:id | Actualización parcial. | 200, 400, 404 |
 | **DELETE** | /api/viajes/:id | Elimina un viaje. | 200, 404 |
 
-## **🛠️ Detalle de Operaciones (POST vs PUT)**
+## **Detalle de Operaciones (POST vs PUT)**
 
 trabajando con el recurso ubicado en /api/viajes/1 ...
 
 ### **POST (/api/viajes)**
- 
-**Body JSON:**
-
-JSON  
+   
 {  
   "nombre\_ciudad": "Bariloche",  
   "pais": "Argentina",  
@@ -26,10 +23,7 @@ JSON
 }
 
 ### **PUT (/api/viajes/1)**
-
-**Body JSON:**
-
-JSON  
+  
 {  
   "nombre\_ciudad": "San Carlos de Bariloche",  
   "pais": "Argentina",  
@@ -37,7 +31,7 @@ JSON
   "precio": 1650.00  
 }
 
-## **🔍 Filtrado y Ordenamiento (GET)**
+## **Filtrado y Ordenamiento (GET)**
 
 | Parámetro | Tipo | ¿Obligatorio? | Ejemplo de uso |
 | :---- | :---- | :---- | :---- |
