@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.3
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: May 24, 2026 at 01:14 AM
--- Server version: 12.2.2-MariaDB
--- PHP Version: 8.5.6
+-- Servidor: 127.0.0.1
+-- Tiempo de generación: 21-06-2026 a las 02:32:04
+-- Versión del servidor: 10.4.32-MariaDB
+-- Versión de PHP: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `basededatos`
+-- Base de datos: `basededatos`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `reserva`
+-- Estructura de tabla para la tabla `reserva`
 --
 
 CREATE TABLE `reserva` (
@@ -37,7 +37,7 @@ CREATE TABLE `reserva` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `reserva`
+-- Volcado de datos para la tabla `reserva`
 --
 
 INSERT INTO `reserva` (`id`, `usuario_id`, `destino_id`, `fecha_salida`, `fecha_regreso`, `estado`) VALUES
@@ -46,7 +46,7 @@ INSERT INTO `reserva` (`id`, `usuario_id`, `destino_id`, `fecha_salida`, `fecha_
 -- --------------------------------------------------------
 
 --
--- Table structure for table `usuario`
+-- Estructura de tabla para la tabla `usuario`
 --
 
 CREATE TABLE `usuario` (
@@ -58,7 +58,7 @@ CREATE TABLE `usuario` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `usuario`
+-- Volcado de datos para la tabla `usuario`
 --
 
 INSERT INTO `usuario` (`id`, `nombre`, `email`, `fecha_de_registro`, `password`) VALUES
@@ -67,7 +67,7 @@ INSERT INTO `usuario` (`id`, `nombre`, `email`, `fecha_de_registro`, `password`)
 -- --------------------------------------------------------
 
 --
--- Table structure for table `viaje`
+-- Estructura de tabla para la tabla `viaje`
 --
 
 CREATE TABLE `viaje` (
@@ -79,19 +79,20 @@ CREATE TABLE `viaje` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `viaje`
+-- Volcado de datos para la tabla `viaje`
 --
 
 INSERT INTO `viaje` (`id`, `nombre_ciudad`, `pais`, `descripcion`, `precio`) VALUES
-(1, 'Tandil', 'Argentina', 'Ciudad de las sierras y el salame.', 50000),
-(2, 'Tokio', 'Japón', 'Metrópolis tecnológica y cultural.', 1500000);
+(1, 'San Carlos de Bariloche', 'Argentina', 'Destino principal de la Patagonia con centro de esquí y gran oferta gastronómica.', 1650),
+(2, 'Tokio', 'Japón', 'Metrópolis tecnológica y cultural.', 1500000),
+(3, 'Bariloche', 'Argentina', 'Ciudad turística conocida por sus paisajes de montaña y lagos.', 1501);
 
 --
--- Indexes for dumped tables
+-- Índices para tablas volcadas
 --
 
 --
--- Indexes for table `reserva`
+-- Indices de la tabla `reserva`
 --
 ALTER TABLE `reserva`
   ADD PRIMARY KEY (`id`),
@@ -99,46 +100,46 @@ ALTER TABLE `reserva`
   ADD KEY `fk_destino_reserva` (`destino_id`);
 
 --
--- Indexes for table `usuario`
+-- Indices de la tabla `usuario`
 --
 ALTER TABLE `usuario`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `email` (`email`);
 
 --
--- Indexes for table `viaje`
+-- Indices de la tabla `viaje`
 --
 ALTER TABLE `viaje`
   ADD PRIMARY KEY (`id`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT de las tablas volcadas
 --
 
 --
--- AUTO_INCREMENT for table `reserva`
+-- AUTO_INCREMENT de la tabla `reserva`
 --
 ALTER TABLE `reserva`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT for table `usuario`
+-- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT for table `viaje`
+-- AUTO_INCREMENT de la tabla `viaje`
 --
 ALTER TABLE `viaje`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- Constraints for dumped tables
+-- Restricciones para tablas volcadas
 --
 
 --
--- Constraints for table `reserva`
+-- Filtros para la tabla `reserva`
 --
 ALTER TABLE `reserva`
   ADD CONSTRAINT `fk_destino_reserva` FOREIGN KEY (`destino_id`) REFERENCES `viaje` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
